@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Purchases Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="style.css" th:href="@{/style.css}" /> 
+  </head>
+
+  <body>
+  </br>
+  </br>
+  
+	<nav>
+		<a href="index.jsp">Home</a> 
+		<a href="users" >Users</a> 
+		<a href="categories">Categories</a> 
+		<a href="products" >Products</a> 
+		<a href="purchases" >Purchases </a> 
+		<a href="report"  class="chosen" >Report</a>
+	</nav>
+		</br>
+	</br>
+		<form action="/report" method="POST">
+		<label for="user">User</label>
+		<select name="userId">
+		  <option th:each="user: ${userCategories}" th:value="${user.id}" th:text="${user.firstName}" />
+		</select>
+	    <input type="submit" value="Go">   
+	</form>
+		</br>
+	</br>
+<div th:switch="${purchases}">
+    <h2 th:case="null">No Report yet!</h2>
+        <div th:case="*">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="purchase : ${purchases}">
+                    <td th:text="${purchase.user.firstName}"></td>
+                    <td th:text="${purchase.product.productName}"></td>
+                    <td th:text="${purchase.quantity}"></td>
+                    <td th:text="${purchase.date}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Update Category</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="style.css" th:href="@{/style.css}" /> 
+  </head>
+
+  <body>
+	<nav>
+		<a href="index.jsp">Home</a> 
+		<a href="users">Users</a> 
+		<a href="categories" class="chosen">Categories</a> 
+		<a href="products">Products</a> 
+		<a href="purchases">Purchases </a> 
+		<a href="report">Report</a>
+	</nav>
+		</br>
+	</br>
+<form action="#" 
+  th:action="@{/updateCategory/{id}(id=${category.id})}" th:object="${category}" 
+  method="post">
+			<label for="categoryName">Category Name</label>
+			<input type="text" th:field="*{categoryName}" id="categoryName" placeholder="Category Name">
+			<span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{name}"></span></br>
+		    <label for="description">Description</label>
+		    <input type="text" th:field="*{description}" id="description" placeholder="Description">
+		    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span></br>
+    <input type="submit" value="Update Category">   
+</form>
+</body>
+</html>

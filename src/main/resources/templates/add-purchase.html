@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Add Purchase</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="style.css" th:href="@{style.css}" /> 
+<!--     <link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
+ -->  
+ </head>
+
+  <body>
+	<nav>
+		<a href="index.jsp">Home</a> 
+		<a href="users" >Users</a> 
+		<a href="categories">Categories</a> 
+		<a href="products">Products</a> 
+		<a href="purchases" class="chosen">Purchases </a> 
+		<a href="report">Report</a>
+	</nav>
+		</br>
+	</br>
+<form action="#" th:action="@{/addPurchase}" th:object="${purchase}" method="POST">
+		<label for="user">User</label>
+		<select th:field="*{user}">
+		  <option th:each="user: ${userCategories}" th:value="${user.id}" th:text="${user.firstName}" />
+		</select>
+		<span th:if="${#fields.hasErrors('user')}" th:errors="*{user}"></span>
+		</br>
+		<label for="category">Product</label>
+		<select th:field="*{product}">
+		  <option th:each="product: ${productCategories}" th:value="${product.id}" th:text="${product.productName}" />
+		</select>
+		<span th:if="${#fields.hasErrors('product')}" th:errors="*{product}"></span>
+		</br>
+			    <label for="quantity">Quantity</label>
+	    <input type="text" th:field="*{quantity}" id="quantity" placeholder="Quantity">
+	    <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span><br>
+	    </br>
+	    <label for="date">Date</label>
+	    <input type="text" th:field="*{date}" id="date" placeholder="Date">
+	    <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+	    </br>
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html>

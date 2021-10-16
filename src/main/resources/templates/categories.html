@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Categories Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="style.css" th:href="@{/style.css}" /> 
+  </head>
+	
+  <body>
+	<nav>
+		<a href="index.jsp">Home</a> 
+		<a href="users" >Users</a> 
+		<a href="categories" class="chosen">Categories</a> 
+		<a href="products">Products</a> 
+		<a href="purchases">Purchases </a> 
+		<a href="report">Report</a>
+	</nav>
+		</br>
+	</br>
+<div th:switch="${categories}">
+    <h2 th:case="null">No Categories yet!</h2>
+        <div th:case="*">
+            <h2>Categories</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Category Name</th>
+                        <th>Description</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="category : ${categories}">
+                    <td th:text="${category.categoryName}"></td>
+                    <td th:text="${category.description}"></td>
+                    <td><a th:href="@{/editCategory/{id}(id=${category.id})}">Edit</a></td>
+                    <td><a th:href="@{/deleteCategory/{id}(id=${category.id})}">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+    <p><a href="/signupCategory">Add a new Category</a></p>
+</div>
+</body>
+</html>

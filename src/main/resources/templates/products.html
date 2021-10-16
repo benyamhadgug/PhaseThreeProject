@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Products Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="style.css" th:href="@{/style.css}" /> 
+  </head>
+
+  <body>
+	<nav>
+		<a href="index.jsp">Home</a> 
+		<a href="users" >Users</a> 
+		<a href="categories">Categories</a> 
+		<a href="products"  class="chosen" >Products</a> 
+		<a href="purchases">Purchases </a> 
+		<a href="report">Report</a>
+	</nav>
+		</br>
+	</br>
+<div th:switch="${products}">
+    <h2 th:case="null">No Products yet!</h2>
+        <div th:case="*">
+            <h2>Products</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Category</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.productName}"></td>
+                    <td th:text="${product.description}"></td>
+                    <td th:text="${product.price}"></td>
+                    <td th:text="${product.category.categoryName}"></td>
+                    <td><a th:href="@{/editProduct/{id}(id=${product.id})}">Edit</a></td>
+                    <td><a th:href="@{/deleteProduct/{id}(id=${product.id})}">Delete</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>      
+    <p><a href="/addProduct">Add a new Product</a></p>
+</div>
+</body>
+</html>

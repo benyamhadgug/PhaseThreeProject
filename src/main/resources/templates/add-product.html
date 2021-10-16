@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+  <head>
+    <title>Add Product</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" media="all" href="style.css" th:href="@{style.css}" /> 
+<!--     <link href="../static/css/Layout.css" th:href="@{/css/Layout.css}" rel="stylesheet" />
+ -->  
+ </head>
+
+  <body>
+	<nav>
+		<a href="index.jsp">Home</a> 
+		<a href="users" >Users</a> 
+		<a href="categories">Categories</a> 
+		<a href="products"   class="chosen">Products</a> 
+		<a href="purchases">Purchases </a> 
+		<a href="report">Report</a>
+	</nav>
+		</br>
+	</br>
+<form action="#" th:action="@{/addProduct}" th:object="${product}" method="POST">
+	    <label for="productName">Product Name</label>
+	    <input type="text" th:field="*{productName}" id="productName" placeholder="Product Name">
+	    <span th:if="${#fields.hasErrors('productName')}" th:errors="*{productName}"></span><br>
+	    </br>
+	    <label for="price">Price</label>
+	    <input type="text" th:field="*{price}" id="price" placeholder="Price">
+	    <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+	    </br>
+	    <label for="description">Description</label>
+	    <input type="text" th:field="*{description}" id="description" placeholder="Description">
+	    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+	    </br>
+	    <label for="category">Description</label>
+		<select th:field="*{category}">
+		  <option th:each="category: ${productCategories}" th:value="${category.id}" th:text="${category.categoryName}" />
+		</select>
+		<span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+		</br>
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html>
